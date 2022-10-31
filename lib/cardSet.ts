@@ -1,31 +1,30 @@
-interface Card {
-  name: string;
-  url: string;
-}
+import { Card } from "./gameState";
 
-export const cardSet = new Map<string, Card>([
-  ["baby-dragon", { name: "Baby Dragon", url: "baby-dragon.png" }],
-  ["baby-duck-1", { name: "Baby Duck", url: "baby-duck-1.png" }],
-  ["baby-duck", { name: "Duck", url: "baby-duck.png" }],
-  ["cat", { name: "Cat", url: "cat.png" }],
-  ["dragon", { name: "Dragon", url: "dragon.png" }],
-  ["duck", { name: "Duck", url: "duck.png" }],
-  ["fox", { name: "Fox", url: "fox.png" }],
+export const cardSet = new Map<string, Omit<Card, "id">>([
+  ["baby-dragon", { name: "Baby Dragon", image: "baby-dragon.png" }],
+  ["baby-duck-1", { name: "Baby Duck", image: "baby-duck-1.png" }],
+  ["baby-duck", { name: "Duck", image: "baby-duck.png" }],
+  ["cat", { name: "Cat", image: "cat.png" }],
+  ["dragon", { name: "Dragon", image: "dragon.png" }],
+  ["duck2", { name: "Duck2", image: "duck.png" }],
+  ["fox", { name: "Fox", image: "fox.png" }],
   [
     "headless-horseman",
-    { name: "Headless Horseman", url: "headless-horseman.png" },
+    { name: "Headless Horseman", image: "headless-horseman.png" },
   ],
-  ["human-boar", { name: "Human-boar", url: "human-boar.png" }],
-  ["knight", { name: "Knight", url: "knight.png" }],
-  ["mystery-house", { name: "Mystery House", url: "mystery-house.png" }],
-  ["necromancer", { name: "Necromancer", url: "necromancer.png" }],
-  ["panda-2", { name: "Panda", url: "panda-2.png" }],
-  ["panda", { name: "Panda", url: "panda.png" }],
-  ["sleepy-dragon", { name: "Sleepy Dragon", url: "sleepy-dragon.png" }],
-  ["tortoise", { name: "Tortoise", url: "tortoise.png" }],
-  ["tree-of-life", { name: "Tree Of Life", url: "tree-of-life.png" }],
-  ["warlock", { name: "Warlock", url: "warlock.png" }],
-  ["warrior", { name: "Warrior", url: "warrior.png" }],
-  ["werewolf", { name: "Werewolf", url: "werewolf.png" }],
-  ["woodcutter", { name: "Woodcutter", url: "woodcutter.png" }],
+  ["human-boar", { name: "Human-boar", image: "human-boar.png" }],
+  ["knight", { name: "Knight", image: "knight.png" }],
+  ["mystery-house", { name: "Mystery House", image: "mystery-house.png" }],
+  ["necromancer", { name: "Necromancer", image: "necromancer.png" }],
+  // ["panda-2", { name: "Panda", image: "panda-2.png" }],
+  ["panda", { name: "Panda", image: "panda.png" }],
+  ["sleepy-dragon", { name: "Sleepy Dragon", image: "sleepy-dragon.png" }],
+  ["tortoise", { name: "Tortoise", image: "tortoise.png" }],
+  ["tree-of-life", { name: "Tree Of Life", image: "tree-of-life.png" }],
+  ["warlock", { name: "Warlock", image: "warlock.png" }],
+  ["warrior", { name: "Warrior", image: "warrior.png" }],
+  ["werewolf", { name: "Werewolf", image: "werewolf.png" }],
+  ["woodcutter", { name: "Woodcutter", image: "woodcutter.png" }],
 ]);
+
+export const cardSetArray = Array.from(cardSet.values());
