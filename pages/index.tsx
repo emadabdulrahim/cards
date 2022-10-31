@@ -21,14 +21,15 @@ export default function Index() {
   const [difficulty, setDifficulty] = React.useState<Difficulty>("easy");
 
   React.useEffect(() => {
-    const unSubLog = useGameStore.subscribe(console.log);
+    const unSubLog = useGameStore.subscribe((state, prevState) => {
+      console.log("prevState:  ", prevState);
+      console.log("state:  ", state);
+    });
 
     return () => {
       unSubLog();
     };
   });
-
-  console.log("🚀 ~ file: index.tsx ~ line 21 ~ Index ~ store", store);
 
   return (
     <Stack.V

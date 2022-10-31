@@ -84,7 +84,7 @@ export const GameCard = React.memo(
           },
         });
       }
-    }, [isMatched]);
+    }, [isMatched, controls]);
 
     return (
       <StyledCard>
@@ -101,7 +101,7 @@ export const GameCard = React.memo(
           onClick={() => {
             controls.start({ rotateY: -180 });
           }}
-          onAnimationComplete={(e) => {
+          onAnimationComplete={(e: { rotateY: number }) => {
             if (e.rotateY === -180) {
               onCardClick(card);
             }

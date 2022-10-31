@@ -47,7 +47,9 @@ export const Shadows = () => {
               >
                 <Stack.V align="center">
                   <Text font="mono">${shadow}</Text>
-                  {shadowUse[shadow] && <Text color="muted">{shadowUse[shadow]}</Text>}
+                  {shadowUse[shadow] && (
+                    <Text color="muted">{shadowUse[shadow]}</Text>
+                  )}
                 </Stack.V>
               </Box>
             ))}
@@ -55,7 +57,9 @@ export const Shadows = () => {
       </Stack.V>
       <Stack.V>
         <Heading size="md3">Shadows Outlined</Heading>
-        <Text css={{ fontStyle: "italic" }}>Best used on elements with no border</Text>
+        <Text css={{ fontStyle: "italic" }}>
+          Best used on elements with no border
+        </Text>
         <Stack.H spacing="md4">
           {Object.keys(theme.shadows)
             .filter((s) => s.endsWith("Outlined"))

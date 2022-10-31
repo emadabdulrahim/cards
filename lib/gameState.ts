@@ -89,9 +89,9 @@ export const useGameStore = create<GameStore>()((set, get) => ({
           }
         } else {
           matchesErrorCount++;
-          setTimeout(() => {
+          requestAnimationFrame(() => {
             set({ selectedCards: [] });
-          }, 0);
+          });
         }
       }
 
