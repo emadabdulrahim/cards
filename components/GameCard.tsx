@@ -1,6 +1,7 @@
 import * as React from "react";
 import { css, withStyle } from "../styles/stitches.config";
 import { Card } from "../lib/gameState";
+import Tilt from "react-parallax-tilt";
 import gsap from "gsap";
 
 interface GameCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -11,14 +12,24 @@ interface GameCardProps extends React.HTMLAttributes<HTMLDivElement> {
   card: Card;
 }
 
+const CardTilt = withStyle(
+  Tilt,
+  css({
+    width: "100%",
+    height: "100%",
+    transformStyle: "preserve-3d",
+  }),
+  { displayName: "CardTilt" }
+);
+
 const CardContainer = withStyle(
   "div",
   css({
     perspective: 1200,
-    flex: "0 1 clamp(70px, 30%, 150px)",
+    flex: "0 1 clamp(40px, 20vw, 150px)",
     aspectRatio: "1/1.45",
   }),
-  { displayName: "StyledCard" }
+  { displayName: "CardContainer" }
 );
 
 const StyledCard = withStyle(
@@ -60,10 +71,19 @@ const StyledBGImage = withStyle(
         },
       },
     },
-    defaultVariants: {
-      size: "contain",
-    },
   })
+);
+
+const CardFront = withStyle(
+  StyledBGImage,
+  css({
+    backgroundSize: "cover",
+    boxShadow:
+      "inset 0 2px 8px rgba(0, 0, 0, 0.4), 0 0px 1px 2px rgba(223, 192, 30, 0.7)",
+    outline: "1px solid #EDC892",
+    outlineOffset: "4px",
+  }),
+  { displayName: "CardFront" }
 );
 
 type Tween = (tween: gsap.TweenVars) => gsap.core.Tween;
@@ -83,7 +103,6 @@ export const GameCard = React.memo(
       animateCard.current = getAnimation(node);
     }, []);
 
-    // animate flip card with gsap
     React.useEffect(() => {
       if (!isFlipped) {
         animateCard.current({
@@ -113,26 +132,41 @@ export const GameCard = React.memo(
           ref={ref}
           onClick={() => {
             animateCard.current({
-              duration: 0.3,
+              duration: 0.4,
               rotationY: -180,
               ease: "elastic.out(0.1, 0.6)",
-              onComplete: (e) => {
+              onComplete: () => {
                 onCardClick(card);
               },
             });
           }}
         >
-          <StyledBGImage
-            css={{
-              backgroundImage: `url('${cardBackUrl}')`,
-            }}
-          ></StyledBGImage>
-          <StyledBGImage
+          <CardTilt
+            tiltEnable={!isFlipped}
+            tiltMaxAngleX={8}
+            tiltMaxAngleY={8}
+            glareEnable={true}
+            transitionEasing={"cubic-bezier(0.16, 1, 0.3, 1)"}
+            transitionSpeed={300}
+            glareMaxOpacity={!isFlipped ? 0.15 : 0}
+            glarePosition="all"
+            glareBorderRadius={"8%"}
+            scale={1.05}
+          >
+            <StyledBGImage
+              size="contain"
+              css={{
+                overflow: "hidden",
+                backgroundImage: `url('${cardBackUrl}')`,
+              }}
+            ></StyledBGImage>
+          </CardTilt>
+          <CardFront
             flipped
             css={{
               backgroundImage: `url('images/card-set/${card.image}')`,
             }}
-          ></StyledBGImage>
+          ></CardFront>
         </StyledCard>
       </CardContainer>
     );

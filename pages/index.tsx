@@ -32,7 +32,14 @@ export default function Index() {
   });
 
   return (
-    <Stack.V align="center">
+    <Stack.V
+      align="center"
+      css={{
+        backgroundImage: "url('/images/bg.png')",
+        backgroundSize: "cover",
+        height: "100vh",
+      }}
+    >
       <Container css={{ textAlign: "center" }}>
         <Heading size="md2">Demo</Heading>
       </Container>
