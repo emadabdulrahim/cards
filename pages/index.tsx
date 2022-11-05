@@ -6,13 +6,13 @@ import { Stack } from "../components/Stack";
 import { Difficulty, useGameStore } from "../lib/gameState";
 import { css, withStyle } from "../styles/stitches.config";
 
-const Grid = withStyle(
-  "div",
+const Container = withStyle(
+  "section",
   css({
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-    gridTemplateRows: "400px",
-    gap: "10%",
+    maxWidth: "1200px",
+    width: "100%",
+    margin: "0 auto",
+    padding: "$32",
   })
 );
 
@@ -32,59 +32,17 @@ export default function Index() {
   });
 
   return (
-    <Stack.V
-      style={{
-        fontFamily: "system-ui, sans-serif",
-        lineHeight: "1.4",
-        padding: 32,
-        position: "relative",
-      }}
-      align="center"
-    >
-      <Heading size="md2" css={{ margin: 0 }}>
-        Demo
-      </Heading>
+    <Stack.V align="center">
+      <Container css={{ textAlign: "center" }}>
+        <Heading size="md2">Demo</Heading>
+      </Container>
       {store.state === "won" && (
         <Heading size="md4" css={{ color: "$warning10" }}>
           You Won!
         </Heading>
       )}
-      <Box
-        css={{
-          position: "relative",
-          margin: "0 auto",
-          width: "65%",
-        }}
-      >
-        <Box
-          css={{
-            position: "relative",
-            margin: "0 auto",
-            width: "100%",
-            borderRadius: 20,
-            overflow: "hidden",
-
-            "> img": {
-              display: "block",
-              width: "100%",
-            },
-          }}
-        >
-          <img src="/images/board.jpg" alt="board" />
-        </Box>
-        <Stack.H
-          spacing="md1"
-          justify={"center"}
-          css={{
-            position: "absolute",
-            inset: "10%",
-            "> *": {
-              $$width: "15%",
-              flex: "0 1 $$width",
-              height: `calc($$width * 1.45)`,
-            },
-          }}
-        >
+      <Container>
+        <Stack.H spacing="md3" justify={"center"}>
           {store.cardsInPlay.map((card) => {
             return (
               <GameCard
@@ -98,7 +56,7 @@ export default function Index() {
             );
           })}
         </Stack.H>
-      </Box>
+      </Container>
       {store.state === "idle" && (
         <Box
           css={{

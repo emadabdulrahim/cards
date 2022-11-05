@@ -1,7 +1,7 @@
 import * as React from "react";
-import { motion, useAnimationControls } from "framer-motion";
 import { css, withStyle } from "../styles/stitches.config";
 import { Card } from "../lib/gameState";
+import gsap from "gsap";
 
 interface GameCardProps extends React.HTMLAttributes<HTMLDivElement> {
   cardBackUrl: string;
@@ -11,20 +11,25 @@ interface GameCardProps extends React.HTMLAttributes<HTMLDivElement> {
   card: Card;
 }
 
-const defaultTransition = {
-  type: "spring",
-  stiffness: 250,
-  damping: 24,
-};
+const CardContainer = withStyle(
+  "div",
+  css({
+    perspective: 1200,
+    flex: "0 1 clamp(70px, 30%, 150px)",
+    aspectRatio: "1/1.45",
+  }),
+  { displayName: "StyledCard" }
+);
 
 const StyledCard = withStyle(
   "div",
   css({
     width: "100%",
     height: "100%",
-    borderRadius: "$lg",
     position: "relative",
-    perspective: "1200px",
+    transformStyle: "preserve-3d",
+    willChange: "transform",
+    cursor: "pointer",
   }),
   { displayName: "StyledCard" }
 );
@@ -32,16 +37,13 @@ const StyledCard = withStyle(
 const StyledBGImage = withStyle(
   "div",
   css({
-    backgroundPosition: "center center",
+    backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    width: "100%",
-    height: "100%",
     position: "absolute",
     inset: 0,
     backfaceVisibility: "hidden",
-    overflow: "hidden",
-    filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))",
-    borderRadius: "$lg",
+    filter: "drop-shadow(0 3px 5px rgba(0, 0, 0, 0.4))",
+    borderRadius: "8%",
 
     variants: {
       size: {
@@ -58,70 +60,81 @@ const StyledBGImage = withStyle(
         },
       },
     },
+    defaultVariants: {
+      size: "contain",
+    },
   })
 );
 
+type Tween = (tween: gsap.TweenVars) => gsap.core.Tween;
+
+type Noop = () => void;
+
+const getAnimation = (el: HTMLElement) => (tween: gsap.TweenVars) => {
+  return gsap.to(el, tween);
+};
+
 export const GameCard = React.memo(
   ({ card, cardBackUrl, isMatched, isFlipped, onCardClick }: GameCardProps) => {
-    const controls = useAnimationControls();
     const isMatchedRef = React.useRef(isMatched);
+    const animateCard = React.useRef<Tween | Noop>(() => {});
+    const ref = React.useCallback((node: HTMLDivElement) => {
+      if (!node) return;
+      animateCard.current = getAnimation(node);
+    }, []);
 
+    // animate flip card with gsap
     React.useEffect(() => {
-      if (isFlipped) {
-        controls.start({ rotateY: -180 });
-      } else {
-        controls.start({ rotateY: 0 });
+      if (!isFlipped) {
+        animateCard.current({
+          duration: 0.5,
+          rotationY: 0,
+          ease: "power3.inOut",
+        });
       }
-    }, [isFlipped, controls]);
+    }, [isFlipped, animateCard]);
 
     React.useEffect(() => {
       if (!isMatchedRef.current && isMatched) {
-        controls.start({
-          scale: [1, 1.1, 1],
-          rotateZ: [-5, 12, -8, 5, 0],
-          transition: {
-            duration: 0.5,
+        animateCard.current({
+          keyframes: {
+            scale: [1, 1.1, 1],
+            rotationZ: [-5, 10, -8, 5, 0],
           },
+          duration: 0.5,
         });
       }
-    }, [isMatched, controls]);
+      isMatchedRef.current = isMatched;
+    }, [isMatched, animateCard]);
 
     return (
-      <StyledCard>
-        <motion.div
-          animate={controls}
-          style={{
-            width: "100%",
-            height: "100%",
-            transformStyle: "preserve-3d",
-            position: "absolute",
-            inset: 0,
-          }}
-          transition={defaultTransition}
+      <CardContainer>
+        <StyledCard
+          ref={ref}
           onClick={() => {
-            controls.start({ rotateY: -180 });
-          }}
-          onAnimationComplete={(e: { rotateY: number }) => {
-            if (e.rotateY === -180) {
-              onCardClick(card);
-            }
+            animateCard.current({
+              duration: 0.3,
+              rotationY: -180,
+              ease: "elastic.out(0.1, 0.6)",
+              onComplete: (e) => {
+                onCardClick(card);
+              },
+            });
           }}
         >
           <StyledBGImage
-            size="contain"
             css={{
               backgroundImage: `url('${cardBackUrl}')`,
             }}
           ></StyledBGImage>
           <StyledBGImage
             flipped
-            size="contain"
             css={{
               backgroundImage: `url('images/card-set/${card.image}')`,
             }}
           ></StyledBGImage>
-        </motion.div>
-      </StyledCard>
+        </StyledCard>
+      </CardContainer>
     );
   }
 );
