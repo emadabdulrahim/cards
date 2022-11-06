@@ -26,7 +26,7 @@ const CardContainer = withStyle(
   "div",
   css({
     perspective: 1200,
-    flex: "0 1 clamp(40px, 20vw, 150px)",
+    flex: "0 1 clamp(40px, 20vw, 136px)",
     aspectRatio: "1/1.45",
   }),
   { displayName: "CardContainer" }

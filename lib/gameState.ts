@@ -41,7 +41,7 @@ const initialGameState: GameStoreProps = {
 
 const getCardsInPlay = (difficulty: Difficulty) => {
   const cardCount =
-    difficulty === "easy" ? 6 : difficulty === "medium" ? 10 : 12;
+    difficulty === "easy" ? 6 : difficulty === "medium" ? 10 : 13;
   const uniqueCards = gsap.utils.shuffle([...cardSetArray]).slice(0, cardCount);
   const cardsInPlay = gsap.utils.shuffle([...uniqueCards, ...uniqueCards]);
   return cardsInPlay.map((card, i) => ({ ...card, id: `${card.name}-${i}` }));
