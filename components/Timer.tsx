@@ -58,6 +58,7 @@ export const Timer = React.memo(() => {
 
   React.useEffect(() => {
     if (gameState === "playing") {
+      timeline.clear();
       timeline.set(ropeRef.current, { width: "100%" });
       timeline.to(ropeRef.current, {
         duration: time,
