@@ -3,6 +3,7 @@ import { Box } from "../components/Box";
 import { GameCard } from "../components/GameCard";
 import { Heading } from "../components/Heading";
 import { Stack } from "../components/Stack";
+import { Timer } from "../components/Timer";
 import { Difficulty, useGameStore } from "../lib/gameState";
 import { css, withStyle } from "../styles/stitches.config";
 
@@ -13,6 +14,14 @@ const Container = withStyle(
     width: "100%",
     margin: "0 auto",
     padding: "$32",
+
+    variants: {
+      size: {
+        normal: {
+          maxWidth: "900px",
+        },
+      },
+    },
   })
 );
 
@@ -36,10 +45,36 @@ export default function Index() {
       <Container css={{ textAlign: "center" }}>
         <Heading size="md2">Demo</Heading>
       </Container>
+      <Container size="normal">
+        <Timer />
+      </Container>
       {store.state === "won" && (
-        <Heading size="md4" css={{ color: "$warning10" }}>
-          You Won!
-        </Heading>
+        <Stack.V>
+          <Heading size="md4" css={{ color: "$warning10" }}>
+            You Won!
+          </Heading>
+          <button
+            onClick={() => {
+              store.play(difficulty);
+            }}
+          >
+            Play Again
+          </button>
+        </Stack.V>
+      )}
+      {store.state === "over" && (
+        <Stack.V>
+          <Heading size="md4" css={{ color: "$warning10" }}>
+            Time Up. You Lost!
+          </Heading>
+          <button
+            onClick={() => {
+              store.play(difficulty);
+            }}
+          >
+            Play Again
+          </button>
+        </Stack.V>
       )}
       <Container>
         <Stack.H spacing="md3" justify={"center"}>

@@ -11,9 +11,11 @@ export interface Card {
 }
 
 export type Difficulty = "easy" | "medium" | "hard";
+export type GameState = "idle" | "playing" | "over" | "paused" | "won";
 
-interface GameState {
-  state: "idle" | "playing" | "lost" | "paused" | "won";
+interface GameStoreProps {
+  state: GameState;
+  time: number;
   difficulty: Difficulty;
   cardsInPlay: Card[];
   matchedCards: Card[];
@@ -21,15 +23,17 @@ interface GameState {
   matchesErrorCount: number;
 }
 
-export interface GameStore extends GameState {
+export interface GameStore extends GameStoreProps {
   play: (difficulty?: Difficulty) => void;
   onCardTurn: (card: Card) => void;
+  timeUp: () => void;
   isFlipped: (card: Card) => boolean;
   isMatched: (card: Card) => boolean;
 }
 
-const initialGameState: GameState = {
+const initialGameState: GameStoreProps = {
   state: "idle",
+  time: 30,
   difficulty: "easy",
   cardsInPlay: [],
   matchedCards: [],
@@ -39,18 +43,28 @@ const initialGameState: GameState = {
 
 const getCardsInPlay = (difficulty: Difficulty) => {
   const cardCount =
-    difficulty === "easy" ? 6 : difficulty === "medium" ? 8 : 10;
+    difficulty === "easy" ? 2 : difficulty === "medium" ? 8 : 10;
   const uniqueCards = gsap.utils.shuffle([...cardSetArray]).slice(0, cardCount);
   const cardsInPlay = gsap.utils.shuffle([...uniqueCards, ...uniqueCards]);
   return cardsInPlay.map((card, i) => ({ ...card, id: `${card.name}-${i}` }));
 };
 
+const timeDifficulties = {
+  easy: 30,
+  medium: 60,
+  hard: 90,
+};
+
 export const useGameStore = create<GameStore>()((set, get) => ({
   ...initialGameState,
+  timeUp: () => {
+    set({ state: "over" });
+  },
   play: (difficulty = "easy") => {
     set({
       ...initialGameState,
       difficulty,
+      time: timeDifficulties[difficulty],
       state: "playing",
       cardsInPlay: getCardsInPlay(difficulty),
     });
@@ -77,7 +91,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
       let selectedCards = [...state.selectedCards, card];
       const matchedCards = [...state.matchedCards];
       let matchesErrorCount = state.matchesErrorCount;
-      let gameState: GameState["state"] = state.state;
+      let gameState: GameStoreProps["state"] = state.state;
 
       if (selectedCards.length === 2) {
         if (selectedCards[0].name === selectedCards[1].name) {

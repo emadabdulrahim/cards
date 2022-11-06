@@ -1,6 +1,6 @@
 import * as React from "react";
 import { css, withStyle } from "../styles/stitches.config";
-import { Card } from "../lib/gameState";
+import { Card, useGameStore } from "../lib/gameState";
 import Tilt from "react-parallax-tilt";
 import gsap from "gsap";
 
@@ -77,11 +77,10 @@ const StyledBGImage = withStyle(
 const CardFront = withStyle(
   StyledBGImage,
   css({
-    backgroundSize: "cover",
+    backgroundSize: "149%",
+    border: "2px double rgba(0, 0, 0, 0.2)",
     boxShadow:
-      "inset 0 2px 8px rgba(0, 0, 0, 0.4), 0 0px 1px 2px rgba(223, 192, 30, 0.7)",
-    outline: "1px solid #EDC892",
-    outlineOffset: "4px",
+      "rgb(0 0 0 / 40%) 0px 2px 8px inset, rgb(50 39 24 / 60%) 0px 0px 1px 3px",
   }),
   { displayName: "CardFront" }
 );
@@ -96,12 +95,14 @@ const getAnimation = (el: HTMLElement) => (tween: gsap.TweenVars) => {
 
 export const GameCard = React.memo(
   ({ card, cardBackUrl, isMatched, isFlipped, onCardClick }: GameCardProps) => {
+    const gameState = useGameStore((state) => state.state);
     const isMatchedRef = React.useRef(isMatched);
     const animateCard = React.useRef<Tween | Noop>(() => {});
     const ref = React.useCallback((node: HTMLDivElement) => {
       if (!node) return;
       animateCard.current = getAnimation(node);
     }, []);
+    const isNotPlaying = gameState !== "playing";
 
     React.useEffect(() => {
       if (!isFlipped) {
@@ -131,6 +132,7 @@ export const GameCard = React.memo(
         <StyledCard
           ref={ref}
           onClick={() => {
+            if (isNotPlaying) return;
             animateCard.current({
               duration: 0.4,
               rotationY: -180,
@@ -142,16 +144,16 @@ export const GameCard = React.memo(
           }}
         >
           <CardTilt
-            tiltEnable={!isFlipped}
+            tiltEnable={!isFlipped && !isNotPlaying}
             tiltMaxAngleX={8}
             tiltMaxAngleY={8}
             glareEnable={true}
             transitionEasing={"cubic-bezier(0.16, 1, 0.3, 1)"}
             transitionSpeed={300}
-            glareMaxOpacity={!isFlipped ? 0.15 : 0}
+            glareMaxOpacity={isNotPlaying ? 0 : !isFlipped ? 0.15 : 0}
             glarePosition="all"
             glareBorderRadius={"8%"}
-            scale={1.05}
+            scale={isNotPlaying ? 1 : 1.05}
           >
             <StyledBGImage
               size="contain"
@@ -167,6 +169,17 @@ export const GameCard = React.memo(
               backgroundImage: `url('images/card-set/${card.image}')`,
             }}
           ></CardFront>
+          {isMatched && (
+            <StyledBGImage
+              size="cover"
+              flipped
+              css={{
+                backgroundImage: `url('/images/sparkles.webp')`,
+                mixBlendMode: "color-dodge",
+                opacity: 0.6,
+              }}
+            />
+          )}
         </StyledCard>
       </CardContainer>
     );
