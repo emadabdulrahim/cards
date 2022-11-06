@@ -10,10 +10,9 @@ import { css, withStyle } from "../styles/stitches.config";
 const Container = withStyle(
   "section",
   css({
-    maxWidth: "1200px",
+    maxWidth: "1100px",
     width: "100%",
     margin: "0 auto",
-    padding: "$32",
 
     variants: {
       size: {
@@ -41,7 +40,7 @@ export default function Index() {
   });
 
   return (
-    <Stack.V align="center">
+    <Stack.V align="center" css={{ padding: "$32" }} spacing="md3">
       <Container css={{ textAlign: "center" }}>
         <Heading size="md2">Demo</Heading>
       </Container>
