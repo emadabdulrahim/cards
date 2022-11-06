@@ -330,82 +330,6 @@ export const {
       lg4: spaceAliases.lg4,
       lg5: spaceAliases.lg5,
     },
-
-    sizes: {
-      // Space scale
-      0: "0px",
-      1: "1px",
-      2: "0.125rem",
-      4: "0.25rem",
-      6: "0.375rem",
-      8: "0.5rem",
-      10: "0.625rem",
-      12: "0.75rem",
-      14: "0.875rem",
-      16: "1rem",
-      20: "1.25rem",
-      24: "1.5rem",
-      28: "1.75rem",
-      32: "2rem",
-      36: "2.25rem",
-      40: "2.5rem",
-      44: "2.75rem",
-      48: "3rem",
-      56: "3.5rem",
-      64: "4rem",
-      80: "5rem",
-      96: "6rem",
-      112: "7rem",
-      128: "8rem",
-      144: "9rem",
-      160: "10rem",
-      176: "11rem",
-      192: "12rem",
-      208: "13rem",
-      224: "14rem",
-      240: "15rem",
-      256: "16rem",
-      288: "18rem",
-      320: "20rem",
-      384: "24rem",
-
-      // Useful for heights and widths
-      // TODO: Maybe move to utils or props? Not exactly tokens...
-      auto: "auto",
-      "1/2": "50%",
-      "1/3": "33.333333%",
-      "2/3": "66.666667%",
-      "1/4": "25%",
-      "2/4": "50%",
-      "3/4": "75%",
-      "1/5": "20%",
-      "2/5": "40%",
-      "3/5": "60%",
-      "4/5": "80%",
-      "1/6": "16.666667%",
-      "2/6": "33.333333%",
-      "3/6": "50%",
-      "4/6": "66.666667%",
-      "5/6": "83.333333%",
-      "1/12": "8.333333%",
-      "2/12": "16.666667%",
-      "3/12": "25%",
-      "4/12": "33.333333%",
-      "5/12": "41.666667%",
-      "6/12": "50%",
-      "7/12": "58.333333%",
-      "8/12": "66.666667%",
-      "9/12": "75%",
-      "10/12": "83.333333%",
-      "11/12": "91.666667%",
-      full: "100%",
-      screenWidth: "100vw",
-      screenHeight: "100vw",
-      min: "min-content",
-      max: "max-content",
-      fit: "fit-content",
-    },
-
     // ================================================================================
     // Layout
 
@@ -417,11 +341,6 @@ export const {
       30: "30",
       40: "40",
       50: "50",
-      "-10": "-10",
-      "-20": "-20",
-      "-30": "-30",
-      "-40": "-40",
-      "-50": "-50",
     },
   },
 });
@@ -440,54 +359,6 @@ export const inlineCss = (c: CSS): string => _css({ css: c });
  * @example const styles: CSS = { color: "$primary" }
  */
 export type CSS = Stitches.CSS<typeof config>;
-
-// ============================================================================
-// Scoped variables
-
-// TODO(redesign): Try adding a hashed module name to var?
-
-let refCounter = 0;
-
-/**
- * Use to create a function which creates unique css properties with a common prefix.
- * [Locally scoped tokens](https://stitches.dev/docs/tokens#locally-scoped-tokens)
- * @param prefix A prefix for created properties
- * @returns A function which creates a unique css property as a stitches locally scoped token.
- * @example
- * const createVar = createVars("Foo")
- * const coolVar = createVar("cool") // --ashby--Foo-cool-0
- * const foo = css({
- *  [coolVar]: theme.colors.primary
- * })
- */
-export const createPrefixedVars = (
-  prefix: string
-): ((debugId?: string) => string) => {
-  return (debugId = "var") => {
-    // Use a simple ref counter to create unique variable names
-    const ref = refCounter++;
-    // Returns a string which can be used as a stitches "locally scoped token"
-    return `$$${ref}--${prefix}${debugId ? `-${debugId}` : ``}`;
-  };
-};
-
-/**
- * Use to create a unique css property.
- * [Locally scoped tokens](https://stitches.dev/docs/tokens#locally-scoped-tokens)
- * @debugId An optional name for debugging purposes. Shows up in property name.
- * @returns A stitches locally scoped token.
- * @example
- * const coolVar = createVar("cool") // --ashby--cool-0
- * const foo = css({
- *  [coolVar]: theme.colors.primary
- * })
- */
-export const createVar = (debugId = "var") => {
-  // Use a simple ref counter to create unique variable names
-  const ref = refCounter++;
-  // Returns a string which can be used as a stitches "locally scoped token"
-  return `$$${ref}${debugId ? `-${debugId}` : ""}`;
-};
 
 type ThemeColors = typeof theme.colors;
 
