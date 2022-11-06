@@ -176,7 +176,7 @@ export const GameCard = React.memo(
               css={{
                 backgroundImage: `url('/images/sparkles.webp')`,
                 mixBlendMode: "color-dodge",
-                opacity: 0.6,
+                opacity: 0.75,
               }}
             />
           )}
