@@ -1,5 +1,3 @@
-// state for a card matching game
-
 import gsap from "gsap";
 import create from "zustand";
 import { cardSetArray } from "./cardSet";
