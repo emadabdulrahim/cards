@@ -13,9 +13,18 @@
 /*
   3. Allow percentage-based heights in the application
 */
-html, body {
+html, body, #__next {
   height: 100%;
 }
+
+#__next {
+  min-height: 100%;
+  height: auto;
+  background-image: url('/images/bg.png');
+  background-size: cover;
+}
+
+
 /*
   Typographic tweaks!
   4. Add accessible line-height
@@ -50,3 +59,4 @@ p, h1, h2, h3, h4, h5, h6 {
 #root, #__next {
   isolation: isolate;
 }
+

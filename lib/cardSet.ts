@@ -21,6 +21,12 @@ export const cardSet = new Map<string, Omit<Card, "id">>([
   ["card-18", { name: "card-18", image: "card-18.png" }],
   ["card-19", { name: "card-19", image: "card-19.png" }],
   ["card-20", { name: "card-20", image: "card-20.png" }],
+  ["card-21", { name: "card-21", image: "card-21.png" }],
+  ["card-22", { name: "card-22", image: "card-22.png" }],
+  ["card-23", { name: "card-23", image: "card-23.png" }],
+  ["card-24", { name: "card-24", image: "card-24.png" }],
+  ["card-25", { name: "card-25", image: "card-25.png" }],
+  ["card-26", { name: "card-26", image: "card-26.png" }],
 ]);
 
 export const cardSetArray = Array.from(cardSet.values());
