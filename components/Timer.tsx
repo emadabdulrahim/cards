@@ -38,7 +38,7 @@ const StyledRope = withStyle(
       right: 0,
       top: 0,
       bottom: 0,
-      width: "24px",
+      width: "5%",
       // background: "linear-gradient(to right, $warning1, $warning2)",
       boxShadow:
         "0 0 18px rgb(247 230 30 / 70%), 0 1px 8px rgb(255 38 250 / 50%)",
@@ -58,7 +58,7 @@ export const Timer = React.memo(() => {
 
   React.useEffect(() => {
     if (gameState === "playing") {
-      timeline.revert();
+      timeline.set(ropeRef.current, { width: "100%" });
       timeline.to(ropeRef.current, {
         duration: time,
         width: 0,
@@ -71,6 +71,8 @@ export const Timer = React.memo(() => {
       timeline.play();
     } else if (gameState === "won") {
       timeline.pause();
+    } else if (gameState === "over") {
+      timeline.clear();
     }
 
     return () => {
