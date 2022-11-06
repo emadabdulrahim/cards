@@ -48,7 +48,7 @@ const getCardsInPlay = (difficulty: Difficulty) => {
 };
 
 const timeDifficulties = {
-  easy: 3,
+  easy: 30,
   medium: 60,
   hard: 90,
 };
