@@ -147,12 +147,9 @@ export const GameCard = React.memo(
             tiltEnable={!isFlipped && !isNotPlaying}
             tiltMaxAngleX={8}
             tiltMaxAngleY={8}
-            glareEnable={true}
+            glareEnable={false}
             transitionEasing={"cubic-bezier(0.16, 1, 0.3, 1)"}
             transitionSpeed={300}
-            glareMaxOpacity={isNotPlaying ? 0 : !isFlipped ? 0.15 : 0}
-            glarePosition="all"
-            glareBorderRadius={"8%"}
             scale={isNotPlaying ? 1 : 1.05}
           >
             <StyledBGImage
