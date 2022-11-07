@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Box } from "../components/Box";
 import { GameCard } from "../components/GameCard";
 import { Heading } from "../components/Heading";
 import { Stack } from "../components/Stack";
 import { Timer } from "../components/Timer";
+import { WelcomeScreen } from "../components/WelcomeScreen";
 import { Difficulty, useGameStore } from "../lib/gameState";
 import { css, withStyle } from "../styles/stitches.config";
 
@@ -40,58 +40,64 @@ export default function Index() {
   });
 
   return (
-    <Stack.V align="center" css={{ padding: "$32" }} spacing="md3">
-      <Container css={{ textAlign: "center" }}>
-        <Heading size="md2">Demo</Heading>
-      </Container>
-      <Container size="normal">
-        <Timer />
-      </Container>
-      {store.state === "won" && (
-        <Stack.V>
-          <Heading size="md4" css={{ color: "$warning10" }}>
-            You Won!
-          </Heading>
-          <button
-            onClick={() => {
-              store.play(difficulty);
-            }}
-          >
-            Play Again
-          </button>
-        </Stack.V>
-      )}
-      {store.state === "over" && (
-        <Stack.V>
-          <Heading size="md4" css={{ color: "$warning10" }}>
-            Time Up. You Lost!
-          </Heading>
-          <button
-            onClick={() => {
-              store.play(difficulty);
-            }}
-          >
-            Play Again
-          </button>
-        </Stack.V>
-      )}
-      <Container>
-        <Stack.H spacing="md3" justify={"center"}>
-          {store.cardsInPlay.map((card) => {
-            return (
-              <GameCard
-                key={card.id}
-                card={card}
-                cardBackUrl={`/images/card-design/design-1.jpg`}
-                isFlipped={store.isFlipped(card)}
-                onCardClick={store.onCardTurn}
-                isMatched={store.isMatched(card)}
-              />
-            );
-          })}
-        </Stack.H>
-      </Container>
-      {store.state === "idle" && (
+    <>
+      {store.state === "idle" ? (
+        <WelcomeScreen />
+      ) : (
+        <Stack.V align="center" css={{ padding: "$32" }} spacing="md3">
+          <Container css={{ textAlign: "center" }}>
+            <Heading size="md2">Demo</Heading>
+          </Container>
+          {store.state !== "idle" && (
+            <Container size="normal">
+              <Timer />
+            </Container>
+          )}
+          {store.state === "won" && (
+            <Stack.V>
+              <Heading size="lg1" css={{ color: "$warning10" }}>
+                You Won!
+              </Heading>
+              <button
+                onClick={() => {
+                  store.play(difficulty);
+                }}
+              >
+                Play Again
+              </button>
+            </Stack.V>
+          )}
+          {store.state === "over" && (
+            <Stack.V>
+              <Heading size="lg1" css={{ color: "$warning10" }}>
+                Time Up. You Lost!
+              </Heading>
+              <button
+                onClick={() => {
+                  store.play(difficulty);
+                }}
+              >
+                Play Again
+              </button>
+            </Stack.V>
+          )}
+          <Container>
+            <Stack.H spacing="md3" justify={"center"}>
+              {store.cardsInPlay.map((card) => {
+                return (
+                  <GameCard
+                    key={card.id}
+                    card={card}
+                    cardBackUrl={`/images/card-design/design-1.jpg`}
+                    isFlipped={store.isFlipped(card)}
+                    onCardClick={store.onCardTurn}
+                    isMatched={store.isMatched(card)}
+                  />
+                );
+              })}
+            </Stack.H>
+          </Container>
+          {/* {store.state === "idle" && (
         <Box
           css={{
             position: "fixed",
@@ -137,7 +143,9 @@ export default function Index() {
             </button>
           </Stack.V>
         </Box>
+      )} */}
+        </Stack.V>
       )}
-    </Stack.V>
+    </>
   );
 }

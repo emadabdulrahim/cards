@@ -20,7 +20,7 @@ html, body, #__next {
 #__next {
   min-height: 100%;
   height: auto;
-  background-image: url('/images/bg.png');
+  background-image: url('/images/background.jpg');
   background-size: cover;
 }
 

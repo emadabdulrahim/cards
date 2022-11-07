@@ -30,8 +30,7 @@ export const {
     // Typography
 
     fonts: {
-      sans: `"Whitney SSm", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`,
-      serif: `Signifier, Newsreader, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif`,
+      serif: `Buenard, Newsreader, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif`,
       mono: `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
     },
 
@@ -45,7 +44,7 @@ export const {
       7: "21px",
       8: "27px",
       9: "35px",
-      10: "59px",
+      10: "64px",
 
       // Alias
       xs: "$1",
@@ -87,7 +86,7 @@ export const {
       sm: "4px",
       md: "6px",
       lg: "12px",
-      xl: "18px",
+      xl: "16px",
       round: "50%",
       pill: "9999px",
     },

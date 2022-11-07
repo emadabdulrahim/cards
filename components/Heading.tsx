@@ -19,20 +19,30 @@ export const headingStyles = css({
       sm3: {
         fontSize: theme.fontSizes[3],
       },
-      sm4: {
+      md1: {
         fontSize: theme.fontSizes[4],
       },
-      md1: {
+      md2: {
         fontSize: theme.fontSizes[5],
       },
-      md2: {
+      md3: {
         fontSize: theme.fontSizes[6],
       },
-      md3: {
+      lg1: {
         fontSize: theme.fontSizes[7],
       },
-      md4: {
+      lg2: {
         fontSize: theme.fontSizes[8],
+        lineHeight: theme.lineHeights.tight,
+        letterSpacing: theme.letterSpacings.tight,
+      },
+      lg3: {
+        fontSize: theme.fontSizes[9],
+        lineHeight: theme.lineHeights.tight,
+        letterSpacing: theme.letterSpacings.tight,
+      },
+      xl: {
+        fontSize: theme.fontSizes[10],
         lineHeight: theme.lineHeights.tight,
       },
     },
