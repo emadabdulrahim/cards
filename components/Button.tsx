@@ -6,36 +6,51 @@ export const StyledButton = withStyle(
   css({
     all: "unset",
     boxSizing: "border-box",
+    fontFamily: "$serif",
     borderRadius: "$md",
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    cursor: "pointer",
-    fontWeight: "$medium",
+    cursor: "default",
 
     variants: {
       appearance: {
         primary: {
-          background:
-            "linear-gradient(180deg, #FFCB7C 0%, #FFEFD7 37.64%, #FEB951 100%)",
-          boxShadow:
-            "0px 0px 0px 0px #20170FB2 inset, 0px 0px 0px 10px #423E394D, 0px 0px 0px 4px #81735F80",
-          color: "#150D0A",
+          gradientRight: "$primary6, $primary4, $primary6",
+          color: "$maxContrast",
+          position: "relative",
+          borderRadius: "$md",
+          fontWeight: "$medium",
+          fontVariant: "small-caps",
+          letterSpacing: "$wide",
+          boxShadow: "inset 0 1px 2px rgba(0, 0, 0, 0.1)",
 
           "&:hover": {
-            background:
-              "linear-gradient(180deg, #FFBE5B 0%, #FFD9A0 37.64%, #D99735 100%)",
+            gradientRight: "$primary5, $primary4, $primary5",
           },
           "&:active": {
-            background: "#F4A835",
+            background: "$primary5",
+          },
+
+          "&::before": {
+            content: "''",
+            position: "absolute",
+            inset: -4,
+            gradientBottom: "$primary2, $primary7",
+            zIndex: -1,
+            borderRadius: "calc($md + 4px)",
           },
         },
       },
       size: {
         large: {
           height: 48,
-          padding: "0 $24",
-          fontSize: "$4",
+          px: "$24",
+          fontSize: "$6",
+          lineHeight: "48px",
+          "> span": {
+            height: "122%",
+          },
         },
       },
       fullWidth: {

@@ -22,7 +22,7 @@ export const headingStyles = css({
         fontSize: theme.fontSizes[3],
       },
       md1: {
-        fontSize: theme.fontSizes[4],
+        fontSize: `clamp(${theme.fontSizes[3]}, 5vw, ${theme.fontSizes[4]})`,
       },
       md2: {
         fontSize: theme.fontSizes[5],
@@ -31,7 +31,7 @@ export const headingStyles = css({
         fontSize: theme.fontSizes[6],
       },
       lg1: {
-        fontSize: theme.fontSizes[7],
+        fontSize: `clamp(${theme.fontSizes[6]}, 5vw, ${theme.fontSizes[7]})`,
       },
       lg2: {
         fontSize: theme.fontSizes[8],

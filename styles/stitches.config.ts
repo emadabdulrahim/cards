@@ -5,7 +5,7 @@ import type * as Stitches from "@stitches/core";
 export type { VariantProps, PropertyValue, ScaleValue } from "@stitches/core";
 
 import { colors } from "./colors";
-import { space, spaceAliases } from "./space";
+import { space, spaceAliases, SpaceToken } from "./space";
 export { withStyle } from "./withStyle";
 export type {
   CSSProps,
@@ -25,6 +25,36 @@ export const {
   config,
 } = createStitches({
   prefix: "cards",
+  utils: {
+    px: (value: SpaceToken) => ({
+      paddingLeft: value,
+      paddingRight: value,
+    }),
+    py: (value: SpaceToken) => ({
+      paddingTop: value,
+      paddingBottom: value,
+    }),
+    mx: (value: SpaceToken | "auto") => ({
+      marginLeft: value,
+      marginRight: value,
+    }),
+    my: (value: SpaceToken | "auto") => ({
+      marginTop: value,
+      marginBottom: value,
+    }),
+    gradientRight: (value: string) => ({
+      backgroundImage: `linear-gradient(to right, ${value})`,
+    }),
+    gradientBottom: (value: string) => ({
+      backgroundImage: `linear-gradient(to bottom, ${value})`,
+    }),
+    gradientBottomRight: (value: string) => ({
+      backgroundImage: `linear-gradient(to bottom right, ${value})`,
+    }),
+    backgroundSoftFadeEdges: (value: string) => ({
+      WebkitMaskImage: `linear-gradient(to right, transparent 0%, black ${value}, black calc(100% - ${value}), transparent 100%)`,
+    }),
+  },
   theme: {
     // ================================================================================
     // Typography
@@ -214,6 +244,8 @@ export const {
       384: space[384],
 
       // Alias Tokens
+      gutter: spaceAliases.gutter,
+
       sm1: spaceAliases.sm1,
       sm2: spaceAliases.sm2,
       sm3: spaceAliases.sm3,
