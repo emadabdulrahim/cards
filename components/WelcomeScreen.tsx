@@ -14,7 +14,7 @@ export const WelcomeScreen = () => {
       justify={"center"}
     >
       <Stack.V
-        css={{ maxWidth: 350, marginTop: "-10%" }}
+        css={{ maxWidth: 450, marginTop: "-10%" }}
         align="center"
         spacing="lg2"
       >
@@ -34,18 +34,19 @@ export const WelcomeScreen = () => {
               alt="Card Quest Logo"
             ></Image>
           </Box>
-          <Stack.V spacing="sm2" align="center">
+          <Stack.V spacing="sm5" align="center">
             <Heading
-              size="xl"
+              size="lg2"
               css={{
-                background: "linear-gradient(180deg, #FFFFFF 0%, #FFC266 100%)",
+                background: "$gradientPrimary",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
+              asChild
             >
-              Card Quest
+              <h1>Card Quest</h1>
             </Heading>
-            <Heading size="lg2" css={{ color: "#FFEED4" }}>
+            <Heading size="md2" color="normal">
               A magical card-matching game.
             </Heading>
           </Stack.V>

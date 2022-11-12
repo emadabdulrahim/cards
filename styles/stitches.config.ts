@@ -30,28 +30,20 @@ export const {
     // Typography
 
     fonts: {
-      serif: `Buenard, Newsreader, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif`,
+      serif: `EB Garamond, Newsreader, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif`,
       mono: `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
     },
 
     fontSizes: {
-      1: "11px",
-      2: "12px",
-      3: "13px",
-      4: "15px",
-      5: "17px",
-      6: "19px",
-      7: "21px",
-      8: "27px",
-      9: "35px",
-      10: "64px",
-
-      // Alias
-      xs: "$1",
-      sm: "$2",
-      md: "$3",
-      lg: "$4",
-      xl: "$5",
+      1: "16px",
+      2: "20px",
+      3: "24px",
+      4: "30px",
+      5: "36px",
+      6: "48px",
+      7: "64px",
+      8: "80px",
+      9: "96px",
     },
 
     lineHeights: {
@@ -69,8 +61,8 @@ export const {
     },
 
     letterSpacings: {
-      tighter: "-0.05em",
-      tight: "-0.025em",
+      tighter: "-0.02em",
+      tight: "-0.01em",
       normal: "0em",
       wide: "0.025em",
       wider: "0.05em",
@@ -114,95 +106,19 @@ export const {
       // ==============================================================================
       // Semantic tokens
 
-      // Neutral (Mauve)
-      neutral1: colors.gray.gray1,
-      neutral2: colors.gray.gray2,
-      neutral3: colors.gray.gray3,
-      neutral4: colors.gray.gray4,
-      neutral5: colors.gray.gray5,
-      neutral6: colors.gray.gray6,
-      neutral7: colors.gray.gray7,
-      neutral8: colors.gray.gray8,
-      neutral9: colors.gray.gray9,
-      neutral10: colors.gray.gray10,
-      neutral11: colors.gray.gray11,
-      neutral12: colors.gray.gray12,
-      neutral13: colors.gray.gray13,
+      primary1: "#FFF9F0",
+      primary2: "#FFEED4",
+      primary3: "#FADAA8",
+      primary4: "#F4C47B",
+      primary5: "#F99D10",
+      primary6: "#C17410",
+      primary7: "#784511",
+      primary8: "#50280B",
+      primary9: "#371B06",
+      primary10: "#120902",
 
-      // Primary (Blurple)
-      primary1: colors.indigo.indigo1,
-      primary2: colors.indigo.indigo2,
-      primary3: colors.indigo.indigo3,
-      primary4: colors.indigo.indigo4,
-      primary5: colors.indigo.indigo5,
-      primary6: colors.indigo.indigo6,
-      primary7: colors.indigo.indigo7,
-      primary8: colors.indigo.indigo8,
-      primary9: colors.indigo.indigo9,
-      primary10: colors.indigo.indigo10,
-      primary11: colors.indigo.indigo11,
-      primary12: colors.indigo.indigo12,
-      primary13: colors.indigo.indigo13,
-
-      // Secondary (Pink)
-      secondary1: colors.pink.pink1,
-      secondary2: colors.pink.pink2,
-      secondary3: colors.pink.pink3,
-      secondary4: colors.pink.pink4,
-      secondary5: colors.pink.pink5,
-      secondary6: colors.pink.pink6,
-      secondary7: colors.pink.pink7,
-      secondary8: colors.pink.pink8,
-      secondary9: colors.pink.pink9,
-      secondary10: colors.pink.pink10,
-      secondary11: colors.pink.pink11,
-      secondary12: colors.pink.pink12,
-      secondary13: colors.pink.pink13,
-
-      // Negative (Red)
-      negative1: colors.red.red1,
-      negative2: colors.red.red2,
-      negative3: colors.red.red3,
-      negative4: colors.red.red4,
-      negative5: colors.red.red5,
-      negative6: colors.red.red6,
-      negative7: colors.red.red7,
-      negative8: colors.red.red8,
-      negative9: colors.red.red9,
-      negative10: colors.red.red10,
-      negative11: colors.red.red11,
-      negative12: colors.red.red12,
-      negative13: colors.red.red13,
-
-      // Warning (Orange)
-      warning1: colors.orange.orange1,
-      warning2: colors.orange.orange2,
-      warning3: colors.orange.orange3,
-      warning4: colors.orange.orange4,
-      warning5: colors.orange.orange5,
-      warning6: colors.orange.orange6,
-      warning7: colors.orange.orange7,
-      warning8: colors.orange.orange8,
-      warning9: colors.orange.orange9,
-      warning10: colors.orange.orange10,
-      warning11: colors.orange.orange11,
-      warning12: colors.orange.orange12,
-      warning13: colors.orange.orange13,
-
-      // Positive (Green)
-      positive1: colors.green.green1,
-      positive2: colors.green.green2,
-      positive3: colors.green.green3,
-      positive4: colors.green.green4,
-      positive5: colors.green.green5,
-      positive6: colors.green.green6,
-      positive7: colors.green.green7,
-      positive8: colors.green.green8,
-      positive9: colors.green.green9,
-      positive10: colors.green.green10,
-      positive11: colors.green.green11,
-      positive12: colors.green.green12,
-      positive13: colors.green.green13,
+      gradientPrimary:
+        "linear-gradient(180deg, #FADAA8 21.28%, #F99D10 92.02%)",
 
       // ==============================================================================
       // Alias tokens
@@ -211,19 +127,19 @@ export const {
       maxContrast: colors.mono.black,
 
       // Backgrounds
-      bgPrimary: "$minContrast",
-      bgSecondary: "$neutral1",
-      bgTertiary: "$neutral2",
+      bgPrimary: "$primary10",
+      bgSecondary: "$primary9",
+      bgTertiary: "$primary8",
 
       // Text
-      contentMuted: "$neutral11",
-      contentNormal: "$neutral12",
-      contentStrong: "$neutral13",
+      contentMuted: "$primary6",
+      contentNormal: "$primary3",
+      contentStrong: "$primary1",
 
       // Border
-      borderMuted: "$neutral5",
-      borderNormal: "$neutral6",
-      borderStrong: "$neutral7",
+      borderMuted: "$neutral9",
+      borderNormal: "$neutral8",
+      borderStrong: "$neutral6",
     },
 
     // ================================================================================
@@ -231,22 +147,9 @@ export const {
 
     shadows: {
       none: "none",
-      sm: "0 1px 3px -1px hsl(250 15% 11% / 12%)",
-      normal: "0px 3px 4px -3px hsl(250 15% 11% / 25%)",
-      md: "0px 1px 2px -1px hsl(250 15% 11% / 12%), 0px 4px 7px -4px hsl(250 15% 11% / 30%)",
-      lg: "0px 3px 4px -3px hsl(250 15% 11% / 12%), 0px 9px 14px -6px hsl(250 15% 11% / 25%)",
-      xl: "0px 4px 6px -4px hsl(250 15% 11% / 15%), 0px 18px 28px -10px hsl(250 15% 11% / 35%)",
-      inner: "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
-
-      // Has a subtle border-like effect. Best used on elements with no border
-      normalOutlined:
-        "0 0 1px hsl(250 15% 11% / 20%), 0px 3px 4px -3px hsl(250 15% 11% / 25%)",
-      mdOutlined:
-        "0 0 1px hsl(250 15% 11% / 20%), 0px 1px 2px -1px hsl(250 15% 11% / 12%), 0px 4px 7px -4px hsl(250 15% 11% / 30%)",
-      lgOutlined:
-        "0 0 1px hsl(250 15% 11% / 20%), 0px 3px 4px -3px hsl(250 15% 11% / 12%), 0px 9px 14px -6px hsl(250 15% 11% / 25%)",
-      xlOutlined:
-        "0 0 1px hsl(250 15% 11% / 20%), 0px 4px 6px -4px hsl(250 15% 11% / 15%), 0px 18px 28px -10px hsl(250 15% 11% / 35%)",
+      sm: "0px 0px 8px rgba(193, 116, 16, 0.6), 0px 0px 4px rgba(250, 218, 168, 0.3)",
+      md: "0px 0px 15px rgba(193, 116, 16, 0.7), 0px 0px 3px 1px rgba(250, 218, 168, 0.39)",
+      lg: "0px 0px 24px rgba(193, 116, 16, 0.8), 0px 0px 4px 1px rgba(250, 218, 168, 0.59)",
     },
 
     // ================================================================================

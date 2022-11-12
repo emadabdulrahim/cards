@@ -11,6 +11,7 @@ export const StyledButton = withStyle(
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
+    fontWeight: "$medium",
 
     variants: {
       appearance: {
@@ -34,7 +35,7 @@ export const StyledButton = withStyle(
         large: {
           height: 48,
           padding: "0 $24",
-          fontSize: "$8",
+          fontSize: "$4",
         },
       },
       fullWidth: {

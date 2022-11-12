@@ -1,7 +1,9 @@
 import { css, theme, withStyle } from "../styles/stitches.config";
+import { typographyVariantsObject } from "./Typography.styles";
 
 export const textStyles = css({
   variants: {
+    ...typographyVariantsObject,
     size: {
       sm1: {
         fontSize: theme.fontSizes[1],
@@ -22,25 +24,6 @@ export const textStyles = css({
       md3: {
         fontSize: theme.fontSizes[6],
         lineHeight: theme.lineHeights.normal,
-      },
-    },
-    weight: {
-      normal: {
-        fontWeight: theme.fontWeights.normal,
-      },
-      medium: {
-        fontWeight: theme.fontWeights.medium,
-      },
-    },
-    color: {
-      muted: {
-        color: theme.colors.contentMuted,
-      },
-      normal: {
-        color: theme.colors.contentNormal,
-      },
-      strong: {
-        color: theme.colors.contentStrong,
       },
     },
     lineHeight: {
