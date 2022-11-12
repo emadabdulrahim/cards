@@ -146,6 +146,7 @@ export const {
       primary8: "#50280B",
       primary9: "#371B06",
       primary10: "#120902",
+      primary11: "#050201",
 
       gradientPrimary:
         "linear-gradient(180deg, #FADAA8 21.28%, #F99D10 92.02%)",
