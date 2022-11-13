@@ -1,15 +1,16 @@
 import { css, theme, withStyle } from "../styles/stitches.config";
+import { typographyVariantsObject } from "./Typography.styles";
 
 export const headingStyles = css({
-  letterSpacing: theme.letterSpacings.tight,
   fontFamily: "$serif",
 
   variants: {
+    ...typographyVariantsObject,
     size: {
       sm1: {
-        fontSize: theme.fontSizes[1],
-        textTransform: "uppercase",
-        letterSpacing: theme.letterSpacings.wide,
+        fontSize: theme.fontSizes[3],
+        fontVariant: "small-caps",
+        letterSpacing: "0.5em",
         color: theme.colors.contentMuted,
       },
       sm2: {
@@ -19,40 +20,27 @@ export const headingStyles = css({
       sm3: {
         fontSize: theme.fontSizes[3],
       },
-      sm4: {
-        fontSize: theme.fontSizes[4],
-      },
       md1: {
-        fontSize: theme.fontSizes[5],
+        fontSize: `clamp(${theme.fontSizes[3]}, 5vw, ${theme.fontSizes[4]})`,
       },
       md2: {
-        fontSize: theme.fontSizes[6],
+        fontSize: theme.fontSizes[5],
       },
       md3: {
-        fontSize: theme.fontSizes[7],
+        fontSize: theme.fontSizes[6],
       },
-      md4: {
+      lg1: {
+        fontSize: `clamp(${theme.fontSizes[6]}, 5vw, ${theme.fontSizes[7]})`,
+      },
+      lg2: {
         fontSize: theme.fontSizes[8],
         lineHeight: theme.lineHeights.tight,
+        letterSpacing: theme.letterSpacings.normal,
       },
-    },
-    weight: {
-      medium: {
-        fontWeight: theme.fontWeights.medium,
-      },
-      semibold: {
-        fontWeight: theme.fontWeights.semibold,
-      },
-    },
-    color: {
-      muted: {
-        color: theme.colors.contentMuted,
-      },
-      normal: {
-        color: theme.colors.contentNormal,
-      },
-      strong: {
-        color: theme.colors.contentStrong,
+      lg3: {
+        fontSize: theme.fontSizes[9],
+        lineHeight: theme.lineHeights.tight,
+        letterSpacing: theme.letterSpacings.tight,
       },
     },
     lineHeight: {

@@ -37,6 +37,8 @@ export const space = {
 } as const;
 
 export const spaceAliases = {
+  gutter: space[20],
+
   sm1: space[2],
   sm2: space[4],
   sm3: space[8],
@@ -55,3 +57,7 @@ export const spaceAliases = {
   lg4: space[64],
   lg5: space[80],
 } as const;
+
+export type SpaceToken =
+  | `$${keyof typeof space}`
+  | `$${keyof typeof spaceAliases}`;
