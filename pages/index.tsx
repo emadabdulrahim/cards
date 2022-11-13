@@ -1,4 +1,7 @@
+import { motion } from "framer-motion";
 import * as React from "react";
+import { Box } from "../components/Box";
+import { StyledButton } from "../components/Button";
 import { GameCard } from "../components/GameCard";
 import { Heading } from "../components/Heading";
 import { LevelOverlay } from "../components/LevelOverlay";
@@ -24,6 +27,8 @@ const Container = withStyle(
     },
   })
 );
+
+const MotionStackV = motion(Stack.V);
 
 export default function Index() {
   const store = useGameStore((state) => state);
@@ -66,18 +71,62 @@ export default function Index() {
             </Stack.V>
           )}
           {store.state === "over" && (
-            <Stack.V>
-              <Heading size="lg1" css={{ color: "$warning10" }}>
-                Time Up. You Lost!
-              </Heading>
-              <button
-                onClick={() => {
-                  store.play();
+            <Box
+              css={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+
+                width: "100%",
+                height: "100%",
+                maxWidth: 400,
+                maxHeight: 400,
+                zIndex: 1,
+              }}
+            >
+              <MotionStackV
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 1.1, y: -20 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 24,
+                }}
+                spacing="lg1"
+                css={{
+                  isolation: "isolate",
+                  height: "100%",
+                  width: "100%",
+                  gradientBottomRight: "$primary10, $primary9",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "$lg",
+                  border: "2px solid $colors$primary7",
                 }}
               >
-                Play Again
-              </button>
-            </Stack.V>
+                <Stack.V
+                  align="center"
+                  spacing="none"
+                  css={{ textAlign: "center" }}
+                >
+                  <Heading size="sm1" css={{ marginLeft: "auto" }}>
+                    time up
+                  </Heading>
+                  <Heading size="md2">Game Over</Heading>
+                </Stack.V>
+                <StyledButton
+                  appearance={"primary"}
+                  size="normal"
+                  onClick={() => {
+                    store.play();
+                  }}
+                >
+                  <span>play again</span>
+                </StyledButton>
+              </MotionStackV>
+            </Box>
           )}
           <Container>
             <Stack.H spacing="md3" justify={"center"}>

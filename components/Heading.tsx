@@ -2,16 +2,15 @@ import { css, theme, withStyle } from "../styles/stitches.config";
 import { typographyVariantsObject } from "./Typography.styles";
 
 export const headingStyles = css({
-  letterSpacing: theme.letterSpacings.tight,
   fontFamily: "$serif",
 
   variants: {
     ...typographyVariantsObject,
     size: {
       sm1: {
-        fontSize: theme.fontSizes[1],
+        fontSize: theme.fontSizes[3],
         fontVariant: "small-caps",
-        letterSpacing: theme.letterSpacings.wide,
+        letterSpacing: "0.5em",
         color: theme.colors.contentMuted,
       },
       sm2: {

@@ -54,7 +54,7 @@ const prepareGame = (level: number) => {
   const cardsInPlay = getCardsInPlay(level);
   return {
     cardsInPlay,
-    time: cardsInPlay.length * 3 + 20,
+    time: cardsInPlay.length * 2 + 5,
   };
 };
 
@@ -85,6 +85,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
     set({
       ...initialGameState,
       state: "playing",
+      level,
       ...prepareGame(level),
     });
   },

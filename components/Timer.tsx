@@ -21,15 +21,25 @@ export const Timer = React.memo(() => {
         delay: 0.25,
         ease: "linear",
         onComplete: () => {
-          timeUp();
+          // shake screen keyframes
+          timeline.to("#__next", {
+            duration: 0.4,
+            keyframes: {
+              x: [5, -8, 7, -6, 0],
+              y: [3, -7, -4, 3, 0],
+            },
+
+            ease: "linear",
+            onComplete: () => {
+              timeUp();
+            },
+          });
         },
       });
 
       timeline.play();
     } else if (gameState === "won") {
       timeline.pause();
-    } else if (gameState === "over") {
-      timeline.clear();
     }
 
     return () => {

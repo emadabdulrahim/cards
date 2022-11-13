@@ -7,6 +7,9 @@ export const stackDefaults = css({
 export const spacingVariants = css({
   variants: {
     spacing: {
+      none: {
+        gap: 0,
+      },
       sm1: {
         gap: theme.space.sm1,
       },
