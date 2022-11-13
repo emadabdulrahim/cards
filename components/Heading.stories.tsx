@@ -35,7 +35,7 @@ export const HeadingComponent = () => {
           </Text>
         </Stack.H>
         {(
-          ["sm1", "sm2", "sm3", "sm4", "md1", "md2", "md3", "md4"] as const
+          ["sm1", "sm2", "sm3", "md1", "md2", "md3", "lg1", "lg2"] as const
         ).map((size) => (
           <Stack.H key={size} {...rowBlockProps} noWrap>
             <Heading size={size}>{pangram}</Heading>
