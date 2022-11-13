@@ -81,7 +81,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
       level: nextLevel,
     });
   },
-  play: (level = 1) => {
+  play: (level = 3) => {
     set({
       ...initialGameState,
       state: "playing",

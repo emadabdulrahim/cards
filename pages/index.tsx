@@ -3,6 +3,7 @@ import * as React from "react";
 import { Box } from "../components/Box";
 import { StyledButton } from "../components/Button";
 import { GameCard } from "../components/GameCard";
+import { Grid } from "../components/Grid";
 import { Heading } from "../components/Heading";
 import { LevelOverlay } from "../components/LevelOverlay";
 import { Stack } from "../components/Stack";
@@ -43,6 +44,8 @@ export default function Index() {
       unSubLog();
     };
   });
+
+  const cardPerRow = Math.ceil(Math.sqrt(store.cardsInPlay.length));
 
   return (
     <>
@@ -129,7 +132,12 @@ export default function Index() {
             </Box>
           )}
           <Container>
-            <Stack.H spacing="md3" justify={"center"}>
+            <Grid
+              css={{
+                maxWidth: cardPerRow * 136 + 24 * (cardPerRow - 1),
+                mx: "auto",
+              }}
+            >
               {store.cardsInPlay.map((card) => {
                 return (
                   <GameCard
@@ -142,56 +150,9 @@ export default function Index() {
                   />
                 );
               })}
-            </Stack.H>
+            </Grid>
           </Container>
           {store.state === "level-complete" && <LevelOverlay />}
-          {/* {store.state === "idle" && (
-        <Box
-          css={{
-            position: "fixed",
-            inset: 0,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Stack.V
-            css={{
-              padding: "$lg4",
-              borderRadius: "$lg",
-              background: "$bgPrimary",
-              boxShadow: "$lgOutlined",
-            }}
-          >
-            <Heading>Magic Card Matching</Heading>
-            <Stack.H>
-              {(["easy", "medium", "hard"] as Difficulty[]).map((diff) => {
-                return (
-                  <label key={diff}>
-                    {diff}
-                    <input
-                      type="radio"
-                      name="difficulty"
-                      value={diff}
-                      checked={difficulty === diff}
-                      onChange={(e) => {
-                        setDifficulty(e.target.value as Difficulty);
-                      }}
-                    />
-                  </label>
-                );
-              })}
-            </Stack.H>
-            <button
-              onClick={() => {
-                store.play(difficulty);
-              }}
-            >
-              Play
-            </button>
-          </Stack.V>
-        </Box>
-      )} */}
         </Stack.V>
       )}
     </>
