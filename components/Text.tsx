@@ -56,7 +56,7 @@ export const textStyles = css({
     size: "sm3",
     color: "normal",
     weight: "normal",
-    lineHeight: "relaxed",
+    lineHeight: "normal",
   },
 });
 

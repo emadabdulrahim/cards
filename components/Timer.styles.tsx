@@ -27,13 +27,12 @@ export const StyledRope = withStyle(
     height: "100%",
 
     "&::before": {
-      // glow
       content: "''",
 
       position: "absolute",
-      right: 3,
-      left: 3,
-      top: 2,
+      right: 2,
+      left: 2,
+      top: 1,
       bottom: "30%",
       gradientBottom: "$minContrast, rgba(255, 255, 255, 0.05)",
       borderRadius: "$pill",

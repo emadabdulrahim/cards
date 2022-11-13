@@ -60,7 +60,7 @@ export const WelcomeScreen = () => {
           appearance={"primary"}
           css={{ maxWidth: 280, width: "100%" }}
           onClick={() => {
-            play("medium");
+            play();
           }}
         >
           <span>play</span>

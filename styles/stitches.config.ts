@@ -79,7 +79,7 @@ export const {
     lineHeights: {
       single: "1",
       tight: "1.2",
-      normal: "1.4",
+      normal: "1.3",
       relaxed: "1.5",
       double: "2",
     },

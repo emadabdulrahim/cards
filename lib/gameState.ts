@@ -9,12 +9,21 @@ export interface Card {
 }
 
 export type Difficulty = "easy" | "medium" | "hard";
-export type GameState = "idle" | "playing" | "over" | "paused" | "won";
+export type GameState =
+  | "idle"
+  | "playing"
+  | "over"
+  | "paused"
+  | "won"
+  | "level-complete";
+
+export type Level = number;
 
 interface GameStoreProps {
   state: GameState;
   time: number;
-  difficulty: Difficulty;
+  level: Level;
+  difficulty?: Difficulty;
   cardsInPlay: Card[];
   matchedCards: Card[];
   selectedCards: Card[];
@@ -22,9 +31,10 @@ interface GameStoreProps {
 }
 
 export interface GameStore extends GameStoreProps {
-  play: (difficulty?: Difficulty) => void;
+  play: (level?: Level) => void;
   onCardTurn: (card: Card) => void;
   timeUp: () => void;
+  advanceToNextLevel: () => void;
   isFlipped: (card: Card) => boolean;
   isMatched: (card: Card) => boolean;
 }
@@ -32,6 +42,7 @@ export interface GameStore extends GameStoreProps {
 const initialGameState: GameStoreProps = {
   state: "idle",
   time: 30,
+  level: 1,
   difficulty: "easy",
   cardsInPlay: [],
   matchedCards: [],
@@ -39,18 +50,19 @@ const initialGameState: GameStoreProps = {
   matchesErrorCount: 0,
 };
 
-const getCardsInPlay = (difficulty: Difficulty) => {
-  const cardCount =
-    difficulty === "easy" ? 6 : difficulty === "medium" ? 10 : 13;
+const prepareGame = (level: number) => {
+  const cardsInPlay = getCardsInPlay(level);
+  return {
+    cardsInPlay,
+    time: cardsInPlay.length * 3 + 20,
+  };
+};
+
+const getCardsInPlay = (level: number) => {
+  const cardCount = Math.min(Math.max(level, 2), 13);
   const uniqueCards = gsap.utils.shuffle([...cardSetArray]).slice(0, cardCount);
   const cardsInPlay = gsap.utils.shuffle([...uniqueCards, ...uniqueCards]);
   return cardsInPlay.map((card, i) => ({ ...card, id: `${card.name}-${i}` }));
-};
-
-const timeDifficulties = {
-  easy: 30,
-  medium: 60,
-  hard: 90,
 };
 
 export const useGameStore = create<GameStore>()((set, get) => ({
@@ -58,13 +70,22 @@ export const useGameStore = create<GameStore>()((set, get) => ({
   timeUp: () => {
     set({ state: "over" });
   },
-  play: (difficulty = "easy") => {
+  advanceToNextLevel: () => {
+    const { level } = get();
+    const nextLevel = level + 1;
+
     set({
       ...initialGameState,
-      difficulty,
-      time: timeDifficulties[difficulty],
+      ...prepareGame(nextLevel),
       state: "playing",
-      cardsInPlay: getCardsInPlay(difficulty),
+      level: nextLevel,
+    });
+  },
+  play: (level = 1) => {
+    set({
+      ...initialGameState,
+      state: "playing",
+      ...prepareGame(level),
     });
   },
   isFlipped: (card: Card) => {
@@ -97,7 +118,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
           selectedCards = [];
 
           if (matchedCards.length === state.cardsInPlay.length) {
-            gameState = "won";
+            gameState = "level-complete";
           }
         } else {
           matchesErrorCount++;

@@ -52,6 +52,15 @@ export const StyledButton = withStyle(
             height: "122%",
           },
         },
+        normal: {
+          height: 36,
+          px: "$32",
+          fontSize: "$5",
+          lineHeight: "36px",
+          "> span": {
+            height: "122%",
+          },
+        },
       },
       fullWidth: {
         true: {

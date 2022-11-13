@@ -1,10 +1,11 @@
 import * as React from "react";
 import { GameCard } from "../components/GameCard";
 import { Heading } from "../components/Heading";
+import { LevelOverlay } from "../components/LevelOverlay";
 import { Stack } from "../components/Stack";
 import { Timer } from "../components/Timer";
 import { WelcomeScreen } from "../components/WelcomeScreen";
-import { Difficulty, useGameStore } from "../lib/gameState";
+import { useGameStore } from "../lib/gameState";
 import { css, withStyle } from "../styles/stitches.config";
 
 const Container = withStyle(
@@ -26,7 +27,6 @@ const Container = withStyle(
 
 export default function Index() {
   const store = useGameStore((state) => state);
-  const [difficulty, setDifficulty] = React.useState<Difficulty>("easy");
 
   React.useEffect(() => {
     const unSubLog = useGameStore.subscribe((state, prevState) => {
@@ -46,13 +46,11 @@ export default function Index() {
       ) : (
         <Stack.V align="center" css={{ padding: "$32" }} spacing="md3">
           <Container css={{ textAlign: "center" }}>
-            <Heading size="md2">Demo</Heading>
+            <Heading size="md2">Level: {store.level}</Heading>
           </Container>
-          {store.state !== "idle" && (
-            <Container size="normal">
-              <Timer />
-            </Container>
-          )}
+          <Container size="normal">
+            <Timer />
+          </Container>
           {store.state === "won" && (
             <Stack.V>
               <Heading size="lg1" css={{ color: "$warning10" }}>
@@ -60,7 +58,7 @@ export default function Index() {
               </Heading>
               <button
                 onClick={() => {
-                  store.play(difficulty);
+                  store.play();
                 }}
               >
                 Play Again
@@ -74,7 +72,7 @@ export default function Index() {
               </Heading>
               <button
                 onClick={() => {
-                  store.play(difficulty);
+                  store.play();
                 }}
               >
                 Play Again
@@ -97,6 +95,7 @@ export default function Index() {
               })}
             </Stack.H>
           </Container>
+          {store.state === "level-complete" && <LevelOverlay />}
           {/* {store.state === "idle" && (
         <Box
           css={{
