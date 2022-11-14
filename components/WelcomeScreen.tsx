@@ -48,7 +48,7 @@ export const WelcomeScreen = () => {
               }}
               asChild
             >
-              <h1>Card Quest</h1>
+              <h1>CardQuest</h1>
             </Heading>
             <Heading size="md1" color="normal">
               A magical card-matching game.
